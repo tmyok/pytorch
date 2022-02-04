@@ -1,4 +1,4 @@
-RG cuda_version=11.5.1
+ARG cuda_version=11.5.1
 ARG cudnn_version=8
 ARG ubuntu=20.04
 FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-runtime-ubuntu${ubuntu}
