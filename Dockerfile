@@ -1,4 +1,4 @@
-ARG cuda_version=11.2.2
+ARG cuda_version=11.5.1
 ARG cudnn_version=8
 ARG ubuntu=20.04
 
@@ -46,19 +46,19 @@ RUN ./bootstrap && make && make install && rm -r /home/cmake-3.22.2
 
 # OpenCV
 WORKDIR /home
-RUN wget -O - https://github.com/opencv/opencv/archive/4.5.0.tar.gz | tar zxvf -
-WORKDIR /home/opencv-4.5.0/build
+RUN wget -O - https://github.com/opencv/opencv/archive/4.5.5.tar.gz | tar zxvf -
+WORKDIR /home/opencv-4.5.5/build
 RUN cmake -D WITH_CUDA=OFF \
           -D BUILD_DOCS=OFF \
           -D BUILD_TESTS=OFF .. && \
     make -j $(nproc) && \
     make install && \
-    rm -r /home/opencv-4.5.0
+    rm -r /home/opencv-4.5.5
 
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install setuptools==60.8.1
 RUN python3 -m pip install wheel==0.37.1
-RUN python3 -m pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+RUN python3 -m pip install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 RUN python3 -m pip install pytorch-lightning==1.5.9
 RUN python3 -m pip install pytorch-metric-learning==1.1.0
 
