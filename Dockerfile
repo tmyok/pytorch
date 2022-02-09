@@ -1,6 +1,9 @@
 ARG cuda_version=11.2.2
 ARG cudnn_version=8
 ARG ubuntu=20.04
+ARG cmake=3.22.2
+ARG opencv=4.5.0
+
 FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-runtime-ubuntu${ubuntu}
 
 LABEL maintainer "Tomoya Okazaki"
@@ -14,15 +17,20 @@ RUN apt -y update && apt -y upgrade && \
         build-essential \
         git \
         less \
-        libgtk2.0-dev \
-        libpng-dev \
-        libjpeg-dev \
-        libopenexr-dev \
-        libtiff-dev \
-        libwebp-dev \
         libgl1-mesa-dev \
         pkg-config \
         libglib2.0-0 \
+        libgtk2.0-dev \
+        libjpeg-dev \
+        libopenexr-dev \
+        libpng-dev \
+        libsm6 \
+        libssl-dev \
+        libtiff-dev \
+        libwebp-dev \
+        libxext-dev \
+        libxrender1 \
+        pkg-config \
         python3-dev \
         python3-numpy \
         python3-pip \
@@ -32,16 +40,22 @@ RUN apt -y update && apt -y upgrade && \
     apt -y clean && \
     rm -rf /var/lib/apt/lists/*
 
+# CMake
+WORKDIR /home
+RUN wget -O - https://github.com/Kitware/CMake/releases/download/v${cmake}/cmake-${cmake}.tar.gz | tar zxvf -
+WORKDIR /home/cmake-${cmake}/
+RUN ./bootstrap && make && make install && rm -r /home/cmake-${cmake}
+
 # OpenCV
 WORKDIR /home
-RUN wget -O - https://github.com/opencv/opencv/archive/4.5.0.tar.gz | tar zxvf -
-WORKDIR /home/opencv-4.5.0/build
+RUN wget -O - https://github.com/opencv/opencv/archive/${opencv}.tar.gz | tar zxvf -
+WORKDIR /home/opencv-${opencv}/build
 RUN cmake -D WITH_CUDA=OFF \
           -D BUILD_DOCS=OFF \
           -D BUILD_TESTS=OFF .. && \
     make -j $(nproc) && \
     make install && \
-    rm -r /home/opencv-4.5.0
+    rm -r /home/opencv-${opencv}
 
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install setuptools==60.8.1
