@@ -24,12 +24,12 @@ RUN apt -y update && apt -y upgrade && \
         libjpeg-dev \
         libopenexr-dev \
         libpng-dev \
-		libsm6 \
-		libssl-dev \
+        libsm6 \
+        libssl-dev \
         libtiff-dev \
         libwebp-dev \
-		libxext-dev \
-		libxrender1 \
+        libxext-dev \
+        libxrender1 \
         pkg-config \
         python3-dev \
         python3-numpy \
