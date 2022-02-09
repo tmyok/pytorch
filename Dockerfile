@@ -18,6 +18,7 @@ RUN apt -y update && apt -y upgrade && \
         git \
         less \
         libgl1-mesa-dev \
+        pkg-config \
         libglib2.0-0 \
         libgtk2.0-dev \
         libjpeg-dev \
