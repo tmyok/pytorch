@@ -75,7 +75,7 @@ RUN python3 -m pip install mlflow==1.23.1
 RUN python3 -m pip install boto3==1.20.52
 RUN python3 -m pip install wandb==0.12.10
 
-RUN python3 -m pip install scikit-learn==1.0.2
+RUN python3 -m pip install scikit-learn==0.24.2
 RUN python3 -m pip install scikit-image==0.19.1
 RUN python3 -m pip install scipy==1.8.0
 
