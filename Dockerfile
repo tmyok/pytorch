@@ -76,8 +76,8 @@ RUN python3 -m pip install boto3==1.20.52
 RUN python3 -m pip install wandb==0.12.10
 
 RUN python3 -m pip install scikit-learn==0.24.2
-RUN python3 -m pip install scikit-image==0.19.1
-RUN python3 -m pip install scipy==1.8.0
+RUN python3 -m pip install scikit-image==0.17.2
+RUN python3 -m pip install scipy==1.5.4
 
 RUN python3 -m pip install matplotlib==3.3.4
 RUN python3 -m pip install seaborn==0.11.2
