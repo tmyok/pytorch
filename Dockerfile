@@ -58,7 +58,7 @@ RUN python3 -m pip install setuptools==59.6.0
 RUN python3 -m pip install wheel==0.37.1
 RUN python3 -m pip install torch==1.10.2
 RUN python3 -m pip install torchvision==0.11.2
-RUN python3 -m pip install torchaudio==0.10.2
+RUN python3 -m pip install torchaudio==0.10.1
 RUN python3 -m pip install pytorch-lightning==1.5.10
 
 RUN python3 -m pip install albumentations==1.1.0
