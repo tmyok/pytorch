@@ -1,6 +1,6 @@
-ARG cuda_version=10.2
-ARG cudnn_version=7
-ARG ubuntu=18.04
+ARG cuda_version=11.5.1
+ARG cudnn_version=8
+ARG ubuntu=20.04
 FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-runtime-ubuntu${ubuntu}
 
 LABEL maintainer "Tomoya Okazaki"
@@ -38,9 +38,9 @@ RUN apt -y update && apt -y upgrade && \
 
 # CMake
 WORKDIR /home
-RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.22.2/cmake-3.22.2.tar.gz | tar zxvf -
-WORKDIR /home/cmake-3.22.2/
-RUN ./bootstrap && make && make install && rm -r /home/cmake-3.22.2
+RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz | tar zxvf -
+WORKDIR /home/cmake-3.22.3/
+RUN ./bootstrap && make && make install && rm -r /home/cmake-3.22.3
 
 # OpenCV
 WORKDIR /home
@@ -54,32 +54,30 @@ RUN cmake -D WITH_CUDA=OFF \
     rm -r /home/opencv-4.5.5
 
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install setuptools==59.6.0
-RUN python3 -m pip install wheel==0.37.1
-RUN python3 -m pip install torch==1.10.2
-RUN python3 -m pip install torchvision==0.11.2
-RUN python3 -m pip install torchaudio==0.10.1
+RUN python3 -m pip install setuptools==59.5.0
+RUN python3 -m pip install wheel==0.34.2
+RUN python3 -m pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 RUN python3 -m pip install pytorch-lightning==1.5.10
 
 RUN python3 -m pip install albumentations==1.1.0
 RUN python3 -m pip install ensemble-boxes==1.0.8
 RUN python3 -m pip install hydra-core==1.1.1
 RUN python3 -m pip install optuna==2.10.0
-RUN python3 -m pip install pandas==1.1.5
+RUN python3 -m pip install pandas==1.4.1
 RUN python3 -m pip install pycocotools==2.0.4
-RUN python3 -m pip install pytorch-metric-learning==1.1.0
+RUN python3 -m pip install pytorch-metric-learning==1.2.0
 RUN python3 -m pip install timm==0.5.4
-RUN python3 -m pip install tqdm==4.62.3
+RUN python3 -m pip install tqdm==4.63.0
 
-RUN python3 -m pip install mlflow==1.23.1
-RUN python3 -m pip install boto3==1.20.52
-RUN python3 -m pip install wandb==0.12.10
+RUN python3 -m pip install mlflow==1.24.0
+RUN python3 -m pip install boto3==1.21.18
+RUN python3 -m pip install wandb==0.12.11
 
-RUN python3 -m pip install scikit-learn==0.24.2
-RUN python3 -m pip install scikit-image==0.17.2
-RUN python3 -m pip install scipy==1.5.4
+RUN python3 -m pip install scikit-learn==1.0.2
+RUN python3 -m pip install scikit-image==0.19.2
+RUN python3 -m pip install scipy==1.8.0
 
-RUN python3 -m pip install matplotlib==3.3.4
+RUN python3 -m pip install matplotlib==3.5.1
 RUN python3 -m pip install seaborn==0.11.2
 
 WORKDIR /home
