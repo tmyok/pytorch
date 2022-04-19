@@ -1,4 +1,4 @@
-ARG cuda_version=11.5.1
+ARG cuda_version=11.6.2
 ARG cudnn_version=8
 ARG ubuntu=20.04
 FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-runtime-ubuntu${ubuntu}
@@ -81,5 +81,8 @@ RUN python3 -m pip install scipy==1.8.0
 
 RUN python3 -m pip install matplotlib==3.5.1
 RUN python3 -m pip install seaborn==0.11.2
+
+RUN python3 -m pip install kornia==0.6.4
+RUN python3 -m pip install kornia-moons==0.1.9
 
 WORKDIR /home
