@@ -11,8 +11,10 @@ ENV LANG=C.UTF-8
 
 RUN apt -y update && apt -y upgrade && \
     apt -y install --no-install-recommends \
+        build-essential \
         git \
         less \
+        python3-dev \
         python3-pip \
         unzip \
         vim \
@@ -22,6 +24,7 @@ RUN apt -y update && apt -y upgrade && \
 
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install setuptools==62.1.0
+RUN python3 -m pip install opencv-python==4.5.5.64
 RUN python3 -m pip install wheel==0.37.1
 RUN python3 -m pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 RUN python3 -m pip install pytorch-lightning==1.6.1
@@ -30,7 +33,6 @@ RUN python3 -m pip install albumentations==1.1.0
 RUN python3 -m pip install ensemble-boxes==1.0.8
 RUN python3 -m pip install faiss-gpu==1.7.2
 RUN python3 -m pip install hydra-core==1.1.2
-RUN python3 -m pip install opencv-python==4.5.5.64
 RUN python3 -m pip install optuna==2.10.0
 RUN python3 -m pip install hydra-optuna-sweeper==1.1.2
 RUN python3 -m pip install pandas==1.4.2
