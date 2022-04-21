@@ -14,6 +14,19 @@ RUN apt -y update && apt -y upgrade && \
         build-essential \
         git \
         less \
+        libgl1-mesa-dev \
+        libglib2.0-0 \
+        libgtk2.0-dev \
+        libjpeg-dev \
+        libopenexr-dev \
+        libpng-dev \
+        libsm6 \
+        libssl-dev \
+        libtiff-dev \
+        libwebp-dev \
+        libxext-dev \
+        libxrender1 \
+        pkg-config \
         python3-dev \
         python3-pip \
         unzip \
@@ -30,7 +43,7 @@ RUN python3 -m pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchau
 RUN python3 -m pip install pytorch-lightning==1.6.1
 
 RUN python3 -m pip install albumentations==1.1.0
-RUN python3 -m pip install ensemble-boxes==1.0.8
+RUN python3 -m pip install ensemble-boxes==1.0.9
 RUN python3 -m pip install faiss-gpu==1.7.2
 RUN python3 -m pip install hydra-core==1.1.2
 RUN python3 -m pip install optuna==2.10.0
@@ -42,8 +55,8 @@ RUN python3 -m pip install timm==0.5.4
 RUN python3 -m pip install tqdm==4.64.0
 
 RUN python3 -m pip install mlflow==1.25.1
-RUN python3 -m pip install boto3==1.21.43
-RUN python3 -m pip install wandb==0.12.14
+RUN python3 -m pip install boto3==1.21.45
+RUN python3 -m pip install wandb==0.12.15
 
 RUN python3 -m pip install scikit-learn==1.0.2
 RUN python3 -m pip install scikit-image==0.19.2
@@ -54,5 +67,6 @@ RUN python3 -m pip install seaborn==0.11.2
 
 RUN python3 -m pip install kornia==0.6.4
 RUN python3 -m pip install kornia-moons==0.1.9
+RUN python3 -m pip install imutils==0.5.4
 
 WORKDIR /home
