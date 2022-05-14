@@ -1,8 +1,6 @@
 ARG cuda_version=11.6.2
 ARG cudnn_version=8
 ARG ubuntu=20.04
-ARG CMAKE_VERSION='3.23.1'
-ARG OPENCV_VERSION='4.5.5'
 FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-runtime-ubuntu${ubuntu}
 
 LABEL maintainer "Tomoya Okazaki"
@@ -45,15 +43,15 @@ RUN apt -y update && apt -y upgrade && \
 
 # CMake
 WORKDIR /home
-RUN wget -O - https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz | tar zxvf -
-WORKDIR /home/cmake-${CMAKE_VERSION}/
-RUN ./bootstrap && make && make install && rm -r /home/cmake-${CMAKE_VERSION}
+RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.23.1/cmake-3.23.1.tar.gz | tar zxvf -
+WORKDIR /home/cmake-3.23.1/
+RUN ./bootstrap && make && make install && rm -r /home/cmake-3.23.1
 
 # OpenCV
 WORKDIR /home
-RUN wget -O - https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz | tar zxvf -
-RUN wget -O - https://github.com/opencv/opencv_contrib/archive/refs/tags/${OPENCV_VERSION}.tar.gz | tar zxvf -
-WORKDIR /home/opencv-${OPENCV_VERSION}/build
+RUN wget -O - https://github.com/opencv/opencv/archive/4.5.5.tar.gz | tar zxvf -
+RUN wget -O - https://github.com/opencv/opencv_contrib/archive/refs/tags/4.5.5.tar.gz | tar zxvf -
+WORKDIR /home/opencv-4.5.5/build
 
 RUN cmake -D WITH_CUDA=OFF \
         -D CMAKE_BUILD_TYPE=RELEASE \
@@ -66,8 +64,8 @@ RUN cmake -D WITH_CUDA=OFF \
         -D BUILD_TESTS=OFF .. && \
     make -j $(nproc) && \
     make install && \
-    rm -r /home/opencv-${OPENCV_VERSION} && \
-    rm -r /home/opencv_contrib-${OPENCV_VERSION}
+    rm -r /home/opencv-4.5.5 && \
+    rm -r /home/opencv_contrib-4.5.5
 
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install setuptools==62.2.0
