@@ -37,7 +37,7 @@ RUN apt -y update && apt -y upgrade && \
 
 # CMake
 WORKDIR /home
-RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.23.1.tar.gz | tar zxvf -
+RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.23.1/cmake-3.23.1.tar.gz | tar zxvf -
 WORKDIR /home/cmake-3.23.1/
 RUN ./bootstrap && make && make install && rm -r /home/cmake-3.23.1
 
