@@ -43,10 +43,10 @@ RUN apt -y update && apt -y upgrade && \
     rm -rf /var/lib/apt/lists/*
 
 RUN add-apt-repository -y ppa:deadsnakes/ppa
-RUN apt -y update && apt -y upgrade && \
-    apt -y install --no-install-recommends \
+RUN apt-get -y update && apt-get -y upgrade && \
+    apt-get -y install --no-install-recommends \
         python3.7 && \
-    apt -y clean && \
+    apt-get -y clean && \
     rm -rf /var/lib/apt/lists/*
 
 # CMake
