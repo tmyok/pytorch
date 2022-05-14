@@ -35,12 +35,18 @@ RUN apt -y update && apt -y upgrade && \
     apt -y clean && \
     rm -rf /var/lib/apt/lists/*
 
+# CMake
+WORKDIR /home
+RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.23.1.tar.gz | tar zxvf -
+WORKDIR /home/cmake-3.23.1/
+RUN ./bootstrap && make && make install && rm -r /home/cmake-3.23.1
+
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install setuptools==62.1.0
+RUN python3 -m pip install setuptools==62.2.0
 RUN python3 -m pip install opencv-python==4.5.5.64
 RUN python3 -m pip install wheel==0.37.1
 RUN python3 -m pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-RUN python3 -m pip install pytorch-lightning==1.6.1
+RUN python3 -m pip install pytorch-lightning==1.6.3
 
 RUN python3 -m pip install albumentations==1.1.0
 RUN python3 -m pip install ensemble-boxes==1.0.9
@@ -55,18 +61,22 @@ RUN python3 -m pip install timm==0.5.4
 RUN python3 -m pip install tqdm==4.64.0
 
 RUN python3 -m pip install mlflow==1.25.1
-RUN python3 -m pip install boto3==1.21.45
-RUN python3 -m pip install wandb==0.12.15
+RUN python3 -m pip install boto3==1.23.0
+RUN python3 -m pip install wandb==0.12.16
 
-RUN python3 -m pip install scikit-learn==1.0.2
+RUN python3 -m pip install scikit-learn==1.1.0
 RUN python3 -m pip install scikit-image==0.19.2
 RUN python3 -m pip install scipy==1.8.0
 
-RUN python3 -m pip install matplotlib==3.5.1
+RUN python3 -m pip install matplotlib==3.5.2
 RUN python3 -m pip install seaborn==0.11.2
 
 RUN python3 -m pip install kornia==0.6.4
 RUN python3 -m pip install kornia-moons==0.1.9
 RUN python3 -m pip install imutils==0.5.4
+RUN python3 -m pip install loguru==0.6.0
+RUN python3 -m pip install einops==0.4.1
+RUN python3 -m pip install yacs==0.1.8
+RUN python3 -m pip install h5py==3.6.0
 
 WORKDIR /home
