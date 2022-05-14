@@ -18,11 +18,9 @@ RUN apt -y update && apt -y upgrade && \
         less \
         libavcodec-dev \
         libavformat-dev \
-        libdc1394-22-dev \
         libgl1-mesa-dev \
         libglib2.0-0 \
         libgtk2.0-dev \
-        libjasper-dev \
         libjpeg-dev \
         libopenexr-dev \
         libpng-dev \
