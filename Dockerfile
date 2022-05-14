@@ -1,6 +1,8 @@
 ARG cuda_version=11.6.2
 ARG cudnn_version=8
 ARG ubuntu=20.04
+ARG CMAKE_VERSION="3.23.1"
+ARG OPENCV_VERSION="4.5.5"
 FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-runtime-ubuntu${ubuntu}
 
 LABEL maintainer "Tomoya Okazaki"
@@ -14,21 +16,29 @@ RUN apt -y update && apt -y upgrade && \
         build-essential \
         git \
         less \
+        libavcodec-dev \
+        libavformat-dev \
+        libdc1394-22-dev \
         libgl1-mesa-dev \
         libglib2.0-0 \
         libgtk2.0-dev \
+        libjasper-dev \
         libjpeg-dev \
         libopenexr-dev \
         libpng-dev \
         libsm6 \
         libssl-dev \
+        libswscale-dev \
         libtiff-dev \
+        libtbb2 \
+        libtbb-dev \
         libwebp-dev \
         libxext-dev \
         libxrender1 \
         pkg-config \
         python3-dev \
         python3-pip \
+        python3-numpy \
         unzip \
         vim \
         wget && \
@@ -37,20 +47,29 @@ RUN apt -y update && apt -y upgrade && \
 
 # CMake
 WORKDIR /home
-RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.23.1/cmake-3.23.1.tar.gz | tar zxvf -
-WORKDIR /home/cmake-3.23.1/
-RUN ./bootstrap && make && make install && rm -r /home/cmake-3.23.1
+RUN wget -O - https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz | tar zxvf -
+WORKDIR /home/cmake-${CMAKE_VERSION}/
+RUN ./bootstrap && make && make install && rm -r /home/cmake-${CMAKE_VERSION}
 
 # OpenCV
 WORKDIR /home
-RUN wget -O - https://github.com/opencv/opencv/archive/4.5.5.tar.gz | tar zxvf -
-WORKDIR /home/opencv-4.5.5/build
+RUN wget -O - https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz | tar zxvf -
+RUN wget -O - https://github.com/opencv/opencv_contrib/archive/refs/tags/${OPENCV_VERSION}.tar.gz | tar zxvf -
+WORKDIR /home/opencv-${OPENCV_VERSION}/build
+
 RUN cmake -D WITH_CUDA=OFF \
+        -D CMAKE_BUILD_TYPE=RELEASE \
+        -D OPENCV_ENABLE_NONFREE=ON \
+        -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.5.5/modules \
+        -D WITH_GTK=ON \
+        -D WITH_EIGEN=ON \
+        -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
         -D BUILD_DOCS=OFF \
         -D BUILD_TESTS=OFF .. && \
     make -j $(nproc) && \
     make install && \
-    rm -r /home/opencv-4.5.5
+    rm -r /home/opencv-${OPENCV_VERSION} && \
+    rm -r /home/opencv_contrib-${OPENCV_VERSION}
 
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install setuptools==62.2.0
