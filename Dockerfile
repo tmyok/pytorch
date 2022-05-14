@@ -35,9 +35,17 @@ RUN apt -y update && apt -y upgrade && \
         python3-dev \
         python3-pip \
         python3-numpy \
+        software-properties-common \
         unzip \
         vim \
         wget && \
+    apt -y clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN add-apt-repository -y ppa:deadsnakes/ppa
+RUN apt -y update && apt -y upgrade && \
+    apt -y install --no-install-recommends \
+        python3.7 && \
     apt -y clean && \
     rm -rf /var/lib/apt/lists/*
 
