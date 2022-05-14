@@ -41,9 +41,19 @@ RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.23.1/cmake-3
 WORKDIR /home/cmake-3.23.1/
 RUN ./bootstrap && make && make install && rm -r /home/cmake-3.23.1
 
+# OpenCV
+WORKDIR /home
+RUN wget -O - https://github.com/opencv/opencv/archive/4.5.5.tar.gz | tar zxvf -
+WORKDIR /home/opencv-4.5.5/build
+RUN cmake -D WITH_CUDA=OFF \
+        -D BUILD_DOCS=OFF \
+        -D BUILD_TESTS=OFF .. && \
+    make -j $(nproc) && \
+    make install && \
+    rm -r /home/opencv-4.5.5
+
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install setuptools==62.2.0
-RUN python3 -m pip install opencv-python==4.5.5.64
 RUN python3 -m pip install wheel==0.37.1
 RUN python3 -m pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 RUN python3 -m pip install pytorch-lightning==1.6.3
