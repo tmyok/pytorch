@@ -1,8 +1,8 @@
 ARG cuda_version=11.6.2
 ARG cudnn_version=8
 ARG ubuntu=20.04
-ARG CMAKE_VERSION="3.23.1"
-ARG OPENCV_VERSION="4.5.5"
+ARG CMAKE_VERSION='3.23.1'
+ARG OPENCV_VERSION='4.5.5'
 FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-runtime-ubuntu${ubuntu}
 
 LABEL maintainer "Tomoya Okazaki"
