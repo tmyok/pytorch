@@ -1,7 +1,4 @@
-ARG cuda_version=10.2
-ARG cudnn_version=7
-ARG ubuntu=18.04
-FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-runtime-ubuntu${ubuntu}
+FROM ubuntu:18.04
 
 LABEL maintainer "Tomoya Okazaki"
 
