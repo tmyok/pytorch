@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 LABEL maintainer "Tomoya Okazaki"
 
@@ -6,48 +6,63 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
+ENV PYTHON_VERSION 3.7.12
+ENV HOME /root
+ENV PYTHON_ROOT $HOME/local/python-$PYTHON_VERSION
+ENV PATH $PYTHON_ROOT/bin:$PATH
+ENV PYENV_ROOT $HOME/.pyenv
+
+
 RUN apt -y update && apt -y upgrade && \
     apt -y install --no-install-recommends \
-        build-essential \
-        git \
-        less \
-        libavcodec-dev \
-        libavformat-dev \
-        libgl1-mesa-dev \
-        libglib2.0-0 \
-        libgtk2.0-dev \
-        libjpeg-dev \
-        libopenexr-dev \
-        libpng-dev \
-        libsm6 \
-        libssl-dev \
-        libswscale-dev \
-        libtiff-dev \
-        libtbb2 \
-        libtbb-dev \
-        libwebp-dev \
-        libxext-dev \
-        libxrender1 \
-        pkg-config \
-        software-properties-common \
-        unzip \
-        vim \
-        wget && \
-    apt -y clean && \
-    rm -rf /var/lib/apt/lists/*
+    build-essential \
+    ca-certificates \
+    curl \
+    git \
+    less \
+    libavcodec-dev \
+    libavformat-dev \
+    libbz2-dev \
+    libffi-dev \
+    libgl1-mesa-dev \
+    libglib2.0-0 \
+    libgtk2.0-dev \
+    liblzma-dev \
+    libncurses5-dev \
+    libncursesw5-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    libjpeg-dev \
+    libopenexr-dev \
+    libpng-dev \
+    libsm6 \
+    libssl-dev \
+    libswscale-dev \
+    libtiff-dev \
+    libtbb2 \
+    libtbb-dev \
+    libwebp-dev \
+    libxext-dev \
+    libxrender1 \
+    llvm \
+    make \
+    pkg-config \
+    tk-dev \
+    unzip \
+    vim \
+    wget \
+    xz-utils \
+    zlib1g-dev \
+ && apt -y clean \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN add-apt-repository -y ppa:deadsnakes/ppa
-RUN apt-get -y update && apt-get -y upgrade && \
-    apt-get -y install --no-install-recommends \
-        python3.7 && \
-    apt-get -y clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN apt-get -y update && apt-get -y upgrade && \
-    apt-get -y install --no-install-recommends \
-        python3-pip && \
-    apt-get -y clean && \
-    rm -rf /var/lib/apt/lists/*
+# pyenv
+WORKDIR $PYENV_ROOT
+RUN wget -O - https://github.com/pyenv/pyenv/archive/refs/tags/v2.3.0.tar.gz | tar zxvf -
+RUN $PYENV_ROOT/pyenv-2.3.0/plugins/python-build/install.sh
+RUN /usr/local/bin/python-build -v $PYTHON_VERSION $PYTHON_ROOT
+RUN rm -rf $PYENV_ROOT
 
 # CMake
 WORKDIR /home
