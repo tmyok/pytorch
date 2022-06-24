@@ -12,6 +12,7 @@ ENV LANG=C.UTF-8
 RUN apt -y update && apt -y upgrade && \
     apt -y install --no-install-recommends \
         build-essential \
+        cmake \
         git \
         less \
         libavcodec-dev \
@@ -41,67 +42,45 @@ RUN apt -y update && apt -y upgrade && \
     apt -y clean && \
     rm -rf /var/lib/apt/lists/*
 
-# CMake
-WORKDIR /home
-RUN wget -O - https://github.com/Kitware/CMake/releases/download/v3.23.1/cmake-3.23.1.tar.gz | tar zxvf -
-WORKDIR /home/cmake-3.23.1/
-RUN ./bootstrap && make && make install && rm -r /home/cmake-3.23.1
-
-# OpenCV
-WORKDIR /home
-RUN wget -O - https://github.com/opencv/opencv/archive/4.5.5.tar.gz | tar zxvf -
-RUN wget -O - https://github.com/opencv/opencv_contrib/archive/refs/tags/4.5.5.tar.gz | tar zxvf -
-WORKDIR /home/opencv-4.5.5/build
-
-RUN cmake -D WITH_CUDA=OFF \
-        -D CMAKE_BUILD_TYPE=RELEASE \
-        -D OPENCV_ENABLE_NONFREE=ON \
-        -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.5.5/modules \
-        -D WITH_GTK=ON \
-        -D WITH_EIGEN=ON \
-        -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
-        -D BUILD_DOCS=OFF \
-        -D BUILD_TESTS=OFF .. && \
-    make -j $(nproc) && \
-    make install && \
-    rm -r /home/opencv-4.5.5 && \
-    rm -r /home/opencv_contrib-4.5.5
-
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install setuptools==62.2.0
+RUN python3 -m pip install setuptools==62.6.0
 RUN python3 -m pip install wheel==0.37.1
-RUN python3 -m pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-RUN python3 -m pip install pytorch-lightning==1.6.3
+RUN python3 -m pip install torch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 torchmetrics==0.9.1 --extra-index-url https://download.pytorch.org/whl/cu113
+RUN python3 -m pip install pytorch-lightning==1.6.4
+RUN python3 -m pip install opencv-python==4.6.0.66
 
-RUN python3 -m pip install albumentations==1.1.0
-RUN python3 -m pip install ensemble-boxes==1.0.9
-RUN python3 -m pip install faiss-gpu==1.7.2
-RUN python3 -m pip install hydra-core==1.1.2
-RUN python3 -m pip install optuna==2.10.0
-RUN python3 -m pip install hydra-optuna-sweeper==1.1.2
-RUN python3 -m pip install pandas==1.4.2
-RUN python3 -m pip install pycocotools==2.0.4
-RUN python3 -m pip install pytorch-metric-learning==1.3.0
+RUN python3 -m pip install albumentations==1.2.0
+RUN python3 -m pip install hydra-core==1.2.0
+RUN python3 -m pip install optuna==2.10.1
+RUN python3 -m pip install hydra-optuna-sweeper==1.2.0
+RUN python3 -m pip install pandas==1.4.3
 RUN python3 -m pip install timm==0.5.4
 RUN python3 -m pip install tqdm==4.64.0
 
-RUN python3 -m pip install mlflow==1.25.1
-RUN python3 -m pip install boto3==1.23.0
-RUN python3 -m pip install wandb==0.12.16
-
-RUN python3 -m pip install scikit-learn==1.1.0
-RUN python3 -m pip install scikit-image==0.19.2
-RUN python3 -m pip install scipy==1.8.0
+RUN python3 -m pip install scikit-learn==1.1.1
+RUN python3 -m pip install scikit-image==0.19.3
+RUN python3 -m pip install scipy==1.8.1
 
 RUN python3 -m pip install matplotlib==3.5.2
 RUN python3 -m pip install seaborn==0.11.2
 
-RUN python3 -m pip install kornia==0.6.4
-RUN python3 -m pip install kornia-moons==0.1.9
-RUN python3 -m pip install imutils==0.5.4
-RUN python3 -m pip install loguru==0.6.0
+RUN python3 -m pip install mlflow==1.26.1
+RUN python3 -m pip install boto3==1.24.16
+RUN python3 -m pip install wandb==0.12.19
+
+RUN python3 -m pip install ensemble-boxes==1.0.9
+RUN python3 -m pip install pycocotools==2.0.4
+
+RUN python3 -m pip install faiss-gpu==1.7.2
+RUN python3 -m pip install pytorch-metric-learning==1.4.0
+
+RUN python3 -m pip install e2cnn==0.2.1
 RUN python3 -m pip install einops==0.4.1
+RUN python3 -m pip install h5py==3.7.0
+RUN python3 -m pip install imutils==0.5.4
+RUN python3 -m pip install kornia==0.6.5
+RUN python3 -m pip install kornia-moons==0.2.0
+RUN python3 -m pip install loguru==0.6.0
 RUN python3 -m pip install yacs==0.1.8
-RUN python3 -m pip install h5py==3.6.0
 
 WORKDIR /home
