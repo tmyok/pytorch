@@ -29,6 +29,9 @@ RUN apt -y update && apt -y upgrade && \
         libtiff-dev \
         libtbb2 \
         libtbb-dev \
+        libvips \
+        libvips-dev \
+        libvips-tools \
         libwebp-dev \
         libxext-dev \
         libxrender1 \
@@ -43,18 +46,18 @@ RUN apt -y update && apt -y upgrade && \
     rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install setuptools==62.6.0
+RUN python3 -m pip install setuptools==63.2.0
 RUN python3 -m pip install wheel==0.37.1
-RUN python3 -m pip install torch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 torchmetrics==0.9.1 --extra-index-url https://download.pytorch.org/whl/cu113
-RUN python3 -m pip install pytorch-lightning==1.6.4
+RUN python3 -m pip install torch==1.12.0+cu116 torchvision==0.13.0+cu116 torchaudio==0.12.0+cu116 torchmetrics==0.9.2 --extra-index-url https://download.pytorch.org/whl/cu116
+RUN python3 -m pip install pytorch-lightning==1.6.5
 RUN python3 -m pip install opencv-python==4.6.0.66
 
-RUN python3 -m pip install albumentations==1.2.0
+RUN python3 -m pip install albumentations==1.2.1
 RUN python3 -m pip install hydra-core==1.2.0
 RUN python3 -m pip install optuna==2.10.1
 RUN python3 -m pip install hydra-optuna-sweeper==1.2.0
 RUN python3 -m pip install pandas==1.4.3
-RUN python3 -m pip install timm==0.5.4
+RUN python3 -m pip install timm==0.6.5
 RUN python3 -m pip install tqdm==4.64.0
 
 RUN python3 -m pip install scikit-learn==1.1.1
@@ -64,23 +67,25 @@ RUN python3 -m pip install scipy==1.8.1
 RUN python3 -m pip install matplotlib==3.5.2
 RUN python3 -m pip install seaborn==0.11.2
 
-RUN python3 -m pip install mlflow==1.26.1
-RUN python3 -m pip install boto3==1.24.16
-RUN python3 -m pip install wandb==0.12.19
+RUN python3 -m pip install mlflow==1.27.0
+RUN python3 -m pip install boto3==1.24.34
+RUN python3 -m pip install wandb==0.12.21
 
 RUN python3 -m pip install ensemble-boxes==1.0.9
 RUN python3 -m pip install pycocotools==2.0.4
 
 RUN python3 -m pip install faiss-gpu==1.7.2
-RUN python3 -m pip install pytorch-metric-learning==1.4.0
+RUN python3 -m pip install pytorch-metric-learning==1.5.1
 
 RUN python3 -m pip install e2cnn==0.2.1
 RUN python3 -m pip install einops==0.4.1
 RUN python3 -m pip install h5py==3.7.0
 RUN python3 -m pip install imutils==0.5.4
-RUN python3 -m pip install kornia==0.6.5
+RUN python3 -m pip install kornia==0.6.6
 RUN python3 -m pip install kornia-moons==0.2.0
 RUN python3 -m pip install loguru==0.6.0
 RUN python3 -m pip install yacs==0.1.8
+
+RUN python3 -m pip install pyvips==2.2.1
 
 WORKDIR /home
