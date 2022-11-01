@@ -46,43 +46,44 @@ RUN apt -y update && apt -y upgrade && \
     rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install setuptools==64.0.3
+RUN python3 -m pip install setuptools==65.5.0
 RUN python3 -m pip install wheel==0.37.1
-RUN python3 -m pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1+cu116 torchmetrics==0.9.3 --extra-index-url https://download.pytorch.org/whl/cu116
-RUN python3 -m pip install pytorch-lightning==1.7.1
+RUN python3 -m pip install torch==1.13.0+cu116 torchvision==0.14.0+cu116 torchaudio==0.13.0+cu116 --extra-index-url https://download.pytorch.org/whl/cu116
+RUN python3 -m pip install pytorch-lightning==1.7.7
 RUN python3 -m pip install opencv-python==4.6.0.66
 
-RUN python3 -m pip install albumentations==1.2.1
+RUN python3 -m pip install albumentations==1.3.0
 RUN python3 -m pip install hydra-core==1.2.0
-RUN python3 -m pip install optuna==2.10.1
+RUN python3 -m pip install optuna==3.0.3
 RUN python3 -m pip install hydra-optuna-sweeper==1.2.0
-RUN python3 -m pip install pandas==1.4.3
-RUN python3 -m pip install timm==0.6.7
-RUN python3 -m pip install tqdm==4.64.0
+RUN python3 -m pip install pandas==1.5.1
+RUN python3 -m pip install timm==0.6.11
+RUN python3 -m pip install tqdm==4.64.1
 
-RUN python3 -m pip install scikit-learn==1.1.2
+RUN python3 -m pip install scikit-learn==1.1.3
 RUN python3 -m pip install scikit-image==0.19.3
-RUN python3 -m pip install scipy==1.9.0
+RUN python3 -m pip install scipy==1.9.3
 
-RUN python3 -m pip install matplotlib==3.5.3
-RUN python3 -m pip install seaborn==0.11.2
+RUN python3 -m pip install matplotlib==3.6.1
+RUN python3 -m pip install seaborn==0.12.1
 
-RUN python3 -m pip install mlflow==1.28.0
-RUN python3 -m pip install boto3==1.24.51
-RUN python3 -m pip install wandb==0.13.1
+RUN python3 -m pip install mlflow==1.30.0
+RUN python3 -m pip install boto3==1.25.5
+RUN python3 -m pip install wandb==0.13.4
 
+RUN python3 -m pip install effdet==0.3.0
 RUN python3 -m pip install ensemble-boxes==1.0.9
-RUN python3 -m pip install pycocotools==2.0.4
+RUN python3 -m pip install pycocotools==2.0.5
 
 RUN python3 -m pip install faiss-gpu==1.7.2
-RUN python3 -m pip install pytorch-metric-learning==1.5.2
+RUN python3 -m pip install pytorch-metric-learning==1.6.2
 
 RUN python3 -m pip install e2cnn==0.2.2
-RUN python3 -m pip install einops==0.4.1
+RUN python3 -m pip install einops==0.5.0
 RUN python3 -m pip install h5py==3.7.0
 RUN python3 -m pip install imutils==0.5.4
-RUN python3 -m pip install kornia==0.6.6
-RUN python3 -m pip install kornia-moons==0.2.0
+RUN python3 -m pip install kornia==0.6.8
+RUN python3 -m pip install kornia-moons==0.2.3
 RUN python3 -m pip install loguru==0.6.0
 RUN python3 -m pip install yacs==0.1.8
 
