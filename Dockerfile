@@ -68,7 +68,7 @@ RUN python3 -m pip install matplotlib==3.6.2
 RUN python3 -m pip install seaborn==0.12.1
 
 RUN python3 -m pip install mlflow==2.0.1
-RUN python3 -m pip install boto3==1.26.17
+RUN python3 -m pip install boto3==1.26.19
 RUN python3 -m pip install wandb==0.13.5
 
 RUN python3 -m pip install effdet==0.3.0
