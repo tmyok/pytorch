@@ -90,4 +90,6 @@ RUN python3 -m pip install yacs==0.1.8
 RUN python3 -m pip install pyvips==2.2.1
 RUN python3 -m pip install torchstain==1.2.0
 
+RUN python3 -m pip install pydicom==2.3.1
+
 WORKDIR /home
