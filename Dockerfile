@@ -91,5 +91,9 @@ RUN python3 -m pip install pyvips==2.2.1
 RUN python3 -m pip install torchstain==1.2.0
 
 RUN python3 -m pip install pydicom==2.3.1
+RUN python3 -m pip install gdcm==1.1
+RUN python3 -m pip install pylibjpeg==1.4.0
+RUN python3 -m pip install python-gdcm==3.0.20
+RUN python3 -m pip install pylibjpeg-libjpeg==1.3.2
 
 WORKDIR /home
