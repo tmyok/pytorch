@@ -48,19 +48,19 @@ RUN apt -y update && apt -y upgrade && \
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install setuptools==65.6.3
 RUN python3 -m pip install wheel==0.38.4
-RUN python3 -m pip install torch==1.13.0+cu116 torchvision==0.14.0+cu116 torchaudio==0.13.0+cu116 --extra-index-url https://download.pytorch.org/whl/cu116
-RUN python3 -m pip install pytorch-lightning==1.8.2
+RUN python3 -m pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1+cu116 --extra-index-url https://download.pytorch.org/whl/cu116
+RUN python3 -m pip install pytorch-lightning==1.8.5
 RUN python3 -m pip install opencv-python==4.6.0.66
 
 RUN python3 -m pip install albumentations==1.3.0
-RUN python3 -m pip install hydra-core==1.2.0
-RUN python3 -m pip install optuna==3.0.3
+RUN python3 -m pip install hydra-core==1.3.0
+RUN python3 -m pip install optuna==3.0.5
 RUN python3 -m pip install hydra-optuna-sweeper==1.2.0
 RUN python3 -m pip install pandas==1.5.2
 RUN python3 -m pip install timm==0.6.12
 RUN python3 -m pip install tqdm==4.64.1
 
-RUN python3 -m pip install scikit-learn==1.1.3
+RUN python3 -m pip install scikit-learn==1.2.0
 RUN python3 -m pip install scikit-image==0.19.3
 RUN python3 -m pip install scipy==1.9.3
 
@@ -68,8 +68,8 @@ RUN python3 -m pip install matplotlib==3.6.2
 RUN python3 -m pip install seaborn==0.12.1
 
 RUN python3 -m pip install mlflow==2.0.1
-RUN python3 -m pip install boto3==1.26.19
-RUN python3 -m pip install wandb==0.13.5
+RUN python3 -m pip install boto3==1.26.34
+RUN python3 -m pip install wandb==0.13.7
 
 RUN python3 -m pip install effdet==0.3.0
 RUN python3 -m pip install ensemble-boxes==1.0.9
@@ -95,5 +95,12 @@ RUN python3 -m pip install gdcm==1.1
 RUN python3 -m pip install pylibjpeg==1.4.0
 RUN python3 -m pip install python-gdcm==3.0.20
 RUN python3 -m pip install pylibjpeg-libjpeg==1.3.2
+RUN python3 -m pip install pylibjpeg-openjpeg==1.3.0
+RUN python3 -m pip install pylibjpeg-rle==1.3.0
+
+RUN python3 -m pip install grad-cam==1.4.6
+
+RUN python3 -m pip install dicomsdl==0.109.1
+RUN python3 -m pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/nightly --upgrade nvidia-dali-nightly-cuda110
 
 WORKDIR /home
