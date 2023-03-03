@@ -80,9 +80,12 @@ RUN python3 -m pip install grad-cam==1.4.6
 RUN python3 -m pip install effdet==0.3.0
 RUN python3 -m pip install ensemble-boxes==1.0.9
 RUN python3 -m pip install pycocotools==2.0.6
+
 RUN python3 -m pip install openmim==0.3.6
 RUN mim install mmcv-full
+RUN python3 -m pip install mmcls==0.25.0
 RUN python3 -m pip install mmdet==2.28.2
+RUN python3 -m pip install mmsegmentation==0.30.0
 
 RUN python3 -m pip install faiss-gpu==1.7.2
 RUN python3 -m pip install pytorch-metric-learning==2.0.1
