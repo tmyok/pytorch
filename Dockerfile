@@ -110,7 +110,7 @@ RUN python3 -m pip install pylibjpeg-rle==1.3.0
 RUN python3 -m pip install dicomsdl==0.109.2
 RUN python3 -m pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/nightly --upgrade nvidia-dali-nightly-cuda110
 
-RUN python3 -m pip install tensorrt==8.6.1
+RUN python3 -m pip install tensorrt==8.6.0
 RUN python3 -m pip install onnxruntime==1.15.0
 RUN python3 -m pip install onnxsim==0.4.31
 
