@@ -110,6 +110,8 @@ RUN python3 -m pip install --no-cache-dir pylibjpeg-rle==1.3.0
 RUN python3 -m pip install --no-cache-dir dicomsdl==0.109.2
 RUN python3 -m pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist/nightly --upgrade nvidia-dali-nightly-cuda110
 
+RUN python3 -m pip cache purge
+
 RUN python3 -m pip install --no-cache-dir tensorrt==8.6.1
 RUN python3 -m pip install --no-cache-dir onnxruntime==1.15.1
 RUN python3 -m pip install --no-cache-dir onnxsim==0.4.33
