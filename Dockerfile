@@ -113,7 +113,6 @@ RUN python3 -m pip install --upgrade pip && \
         segmentation-models-pytorch==0.3.3 \
         sentencepiece==0.1.99 \
         sentence-transformers==2.2.2 \
-        tensorrt==8.6.1 \
         torchstain==1.3.0 \
         tqdm==4.65.0 \
         transformers==4.31.0 \
@@ -137,6 +136,11 @@ RUN python3 -m pip install --upgrade pip && \
         mmpretrain==1.0.1 \
         mmdet==3.1.0 \
         mmsegmentation==1.1.1 && \
+    python3 -m pip cache purge
+
+RUN python3 -m pip install --upgrade pip && \
+    python3 -m pip install --no-cache-dir \
+        tensorrt==8.6.1 && \
     python3 -m pip cache purge
 
 RUN python3 -m pip install --no-cache-dir -U timm==0.9.5
