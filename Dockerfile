@@ -68,6 +68,7 @@ RUN python3 -m pip install --upgrade pip && \
         ctranslate2==3.20.0 \
         cupy-cuda11x==12.2.0 \
         datasets==2.14.5 \
+        deepspeed==0.10.3 \
         e2cnn==0.2.3 \
         effdet==0.4.1 \
         einops==0.6.1 \
